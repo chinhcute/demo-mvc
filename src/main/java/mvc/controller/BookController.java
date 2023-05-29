@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
@@ -53,11 +56,28 @@ public class BookController {
         setCategoryDropDownList(model);
         return "book";
     }
-    @RequestMapping(value = "/newBook",method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
-    public String saveBook(BookEntity book){
-        bookRepository.save(book);
-        return "redirect:/";
+
+    @RequestMapping( value = "/newBook",method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+    public String saveBook(@Valid @ModelAttribute("book") BookEntity bookEntity, BindingResult br, Model model){
+        if(br.hasErrors())
+        {
+            setCategoryDropDownList(model);
+            return "book";
+        }
+
+            bookRepository.save(bookEntity);
+
+            return "redirect:/";
+
+
     }
+//    @RequestMapping(value = "/newBook", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+//    public String saveBook(BookEntity book, HttpSession session) {
+//        bookRepository.save(book);
+//        session.setAttribute("savedBook", book); // Lưu thông tin sách vào session với key "savedBook"
+//        return "sesson";
+//    }
+
     @RequestMapping(value = "/edit/{id}",method = RequestMethod.GET)
     public String showEditBook(Model model, @PathVariable int id){
         model.addAttribute("book", bookRepository.findById(id));

@@ -1,5 +1,9 @@
 package mvc.entity;
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "book")
@@ -8,7 +12,7 @@ public class BookEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "id")
     private int id;
-
+    @NotEmpty(message = "gggggggg")
     @Column (name = "name")
     private String name;
 
