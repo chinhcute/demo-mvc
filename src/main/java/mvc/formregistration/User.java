@@ -1,4 +1,4 @@
-package mvc.model;
+package mvc.formregistration;
 
 import org.springframework.format.annotation.DateTimeFormat;
 

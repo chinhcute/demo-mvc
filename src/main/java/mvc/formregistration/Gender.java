@@ -1,4 +1,4 @@
-package mvc.model;
+package mvc.formregistration;
 
     public enum Gender{
         Male,

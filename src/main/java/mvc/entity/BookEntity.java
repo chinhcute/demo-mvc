@@ -22,6 +22,12 @@ public class BookEntity {
     @PrimaryKeyJoinColumn
     private BookDetailsEntity bookDetails;
 
+    public BookEntity(int id, String name, String author, CategoryEntity category) {
+        this.id = id;
+        this.name = name;
+        this.author = author;
+        this.category = category;
+    }
 
     public BookEntity(){
 

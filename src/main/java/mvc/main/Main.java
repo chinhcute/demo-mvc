@@ -1,29 +1,27 @@
-package org.example;
+package mvc.main;
 
-import confi.JPA_config;
-import entity.BookDetailsEntity;
-import entity.BookEntity;
-import entity.CategoryEntity;
+
+import mvc.confi.JPA_config;
+import mvc.entity.BookEntity;
+import mvc.repository.BookRepository;
+import mvc.repository.CategoryRepository;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import repository.BookRepository;
-import repository.CategoryRepository;
 
-import java.time.LocalDate;
+
 import java.util.List;
-import java.util.Optional;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
 
     static ApplicationContext context = new AnnotationConfigApplicationContext(JPA_config.class);
-    static BookRepository bookRepository = (BookRepository) context.getBean("bookRepository");
+    static BookRepository bookRepository = (BookRepository) context.getBean( "bookRepository");
     static CategoryRepository categoryRepository = (CategoryRepository) context.getBean("categoryRepository");
 
     public static void main(String[] args) {
 //     createNewBook();
-//        readBook();
+        readBook();
 //        update(1);
 //        detele(3);
 //        readBook();
@@ -41,9 +39,16 @@ public class Main {
         //createNewBookEntryWithNewCategory();
 //        createNewBookEntryWithNewCategory();
 //        createNewBookEntry();
-      //  getJon(1);
+//        getJon(1);
     }
+    public static void readBook() {
 
+        List<BookEntity> bookEntityList = (List<BookEntity>) bookRepository.findAll();
+        System.out.println(bookEntityList.size());
+        for (BookEntity book : bookEntityList) {
+            System.out.println(book.toString());
+        }
+    }
     //    public static BookEntity createNewBook() {
 //        BookEntity bookEntity = new BookEntity();
 //        bookEntity.setName("tran cong chinh");
@@ -62,52 +67,52 @@ public class Main {
 //
 //        return bookEntity;
 //    }
-    public static BookEntity createNewBook() {
-        BookDetailsEntity bookDetails = new BookDetailsEntity();
-        bookDetails.setIsbn("chinh");
-        bookDetails.setNumber(23);
-        bookDetails.setPrice(11.2);
-        bookDetails.setPublishDate(LocalDate.now());
-        BookEntity book = new BookEntity();
-        book.setName("java a -> z");
-        book.setAuthor("roger");
-        book.setBookDetails(bookDetails);
-        bookDetails.setBook(book);
-        return book;
-
-    }
-
-    public static void createNewBookEntry() {
-        CategoryEntity categoryEntity = new CategoryEntity();
-        categoryEntity.setId(1);
-        BookEntity book = createNewBook();
-        book.setCategory(categoryEntity);
-        bookRepository.save(book);
-
-    }
-
-    public static void createNewBookEntryWithNewCategory() {
-        CategoryEntity categoryEntity = createNewCategory();
-        categoryRepository.save(categoryEntity);
-        BookEntity book = createNewBook();
-        book.setCategory(categoryEntity);
-        bookRepository.save(book);
-    }
-
-    public static CategoryEntity createNewCategory() {
-        CategoryEntity categoryEntity = new CategoryEntity();
-        categoryEntity.setName("IT");
-        categoryEntity.setDescription("It book");
-        return categoryEntity;
-    }
-    public static void getJon(int id){
-       List<BookEntity>  bookEntity = (List<BookEntity>) bookRepository.getJon(id);
-        for(BookEntity book : bookEntity){
-
-           CategoryEntity category = book.getCategory();
-            System.out.println(book.toString() + " - "+ category.getName() + " - "+ category.getDescription());
-        }
-    }
+//    public static BookEntity createNewBook() {
+//        BookDetailsEntity bookDetails = new BookDetailsEntity();
+//        bookDetails.setIsbn("chinh");
+//        bookDetails.setNumber(23);
+//        bookDetails.setPrice(11.2);
+//        bookDetails.setPublishDate(LocalDate.now());
+//        BookEntity book = new BookEntity();
+//        book.setName("java a -> z");
+//        book.setAuthor("roger");
+//        book.setBookDetails(bookDetails);
+//        bookDetails.setBook(book);
+//        return book;
+//
+//    }
+//
+//    public static void createNewBookEntry() {
+//        CategoryEntity categoryEntity = new CategoryEntity();
+//        categoryEntity.setId(1);
+//        BookEntity book = createNewBook();
+//        book.setCategory(categoryEntity);
+//        bookRepository.save(book);
+//
+//    }
+//
+//    public static void createNewBookEntryWithNewCategory() {
+//        CategoryEntity categoryEntity = createNewCategory();
+//        categoryRepository.save(categoryEntity);
+//        BookEntity book = createNewBook();
+//        book.setCategory(categoryEntity);
+//        bookRepository.save(book);
+//    }
+//
+//    public static CategoryEntity createNewCategory() {
+//        CategoryEntity categoryEntity = new CategoryEntity();
+//        categoryEntity.setName("IT");
+//        categoryEntity.setDescription("It book");
+//        return categoryEntity;
+//    }
+//    public static void getJon(int id){
+//        List<BookEntity>  bookEntity = (List<BookEntity>) bookRepository.getJon(id);
+//        for(BookEntity book : bookEntity){
+//
+//            CategoryEntity category = book.getCategory();
+//            System.out.println(book.toString() + " - "+ category.getName() + " - "+ category.getDescription());
+//        }
+//    }
 
 //    public static void readBook() {
 //        List<BookEntity> bookEntityList = (List<BookEntity>) bookRepository.findAll();
@@ -117,6 +122,8 @@ public class Main {
 //
 //        }
 //    }
+
+
 //
 //    public static void readBook(int bookId) {
 //        Optional<BookEntity> bookEntityList = bookRepository.findById(bookId);

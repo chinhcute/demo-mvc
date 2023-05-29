@@ -1,7 +1,8 @@
 package mvc.controller;
 
-import mvc.model.Gender;
-import mvc.model.User;
+import mvc.formregistration.Gender;
+import mvc.formregistration.User;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;

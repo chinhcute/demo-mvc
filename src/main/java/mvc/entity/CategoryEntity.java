@@ -17,6 +17,16 @@ public class CategoryEntity {
    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
     private List<BookEntity> bookEntityList;
 
+    public CategoryEntity(int id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+
+    }
+
+    public CategoryEntity() {
+    }
+
     public int getId() {
         return id;
     }

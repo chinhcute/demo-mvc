@@ -1,4 +1,5 @@
-package confi;
+package mvc.confi;
+
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +10,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import service.AccountService;
+
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -17,7 +18,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "repository")
+@EnableJpaRepositories(basePackages = "mvc")
 public class JPA_config {
 
     @Bean
@@ -34,12 +35,13 @@ public class JPA_config {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         final LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(dataSource());
-        entityManagerFactoryBean.setPackagesToScan("entity");
+        entityManagerFactoryBean.setPackagesToScan("mvc");
         entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         entityManagerFactoryBean.setJpaProperties(additionalProperties());
 
         return entityManagerFactoryBean;
     }
+
 
     final Properties additionalProperties() {
         final Properties hibernateProperties = new Properties();
@@ -57,9 +59,5 @@ public class JPA_config {
         transactionManager.setEntityManagerFactory(emf);
         return transactionManager;
     }
-@Bean
-    public AccountService accountService(JpaTransactionManager jpaTransactionManager){
-        AccountService accountService = new AccountService(jpaTransactionManager);
-        return  accountService;
-    }
+
 }
