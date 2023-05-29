@@ -8,27 +8,23 @@ import java.util.List;
 public class CategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name= "id")
     private int id;
-    @Column(name = "name")
+
+    @Column(name= "name")
     private String name;
-    @Column(name = "description")
-    private  String description;
-   @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
+
+    @Column(name= "description")
+    private String description;
+
+    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
     private List<BookEntity> bookEntityList;
-
-    public CategoryEntity(int id, String name, String description) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-
-    }
-
-    public CategoryEntity() {
-    }
 
     public int getId() {
         return id;
+    }
+
+    public CategoryEntity() {
     }
 
     public void setId(int id) {

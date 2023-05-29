@@ -1,25 +1,36 @@
 package mvc.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "bookDetails")
+@Table(name= "bookdetails")
 public class BookDetailsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "id")
-    private  int id;
-    @Column (name = "isbn")
+    @Column(name= "id")
+    private int id;
+
+    @Column(name= "isbn")
     private String isbn;
-    @Column (name = "price")
-    private double price;
-    @Column (name = "number")
-    private int number;
-    @Column(name = "publishDate")
+
+    @Column(name= "price")
+    private int price;
+
+    @Column(name= "numberOfPage")
+    private int numberOfPage;
+
+    @Column (name = "publishDate")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate publishDate;
-    @OneToOne(mappedBy =  "bookDetails")
+
+    @OneToOne(mappedBy = "bookDetails")
     private BookEntity book;
+
+    public BookDetailsEntity() {
+    }
 
     public int getId() {
         return id;
@@ -29,7 +40,6 @@ public class BookDetailsEntity {
         this.id = id;
     }
 
-
     public String getIsbn() {
         return isbn;
     }
@@ -38,20 +48,20 @@ public class BookDetailsEntity {
         this.isbn = isbn;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
-    public int getNumber() {
-        return number;
+    public int getNumberOfPage() {
+        return numberOfPage;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setNumberOfPage(int numberOfPage) {
+        this.numberOfPage = numberOfPage;
     }
 
     public LocalDate getPublishDate() {
@@ -69,6 +79,4 @@ public class BookDetailsEntity {
     public void setBook(BookEntity book) {
         this.book = book;
     }
-
-
 }
