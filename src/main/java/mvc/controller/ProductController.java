@@ -99,7 +99,7 @@ public String check(@ModelAttribute Customer customer) {
 
     for (Iterator<ProductEntity> iterator = productEntityList.iterator(); iterator.hasNext();) {
         ProductEntity product = iterator.next();
-        if (product.getId() == 0) {
+        if (!productRepository.existsById(product.getId())){
             iterator.remove();
         } else {
             OrderDetailsEntity orderDetailsEntity = new OrderDetailsEntity();
