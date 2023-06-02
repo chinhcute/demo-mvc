@@ -14,6 +14,9 @@ public class OrderEntity {
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderDetailsEntity> orderDetailsEntityList;
+    @ManyToOne
+    @JoinColumn(name = "customerId")
+    private Customer customer;
 
     public int getId() {
         return id;
@@ -37,6 +40,14 @@ public class OrderEntity {
 
     public void setOrderDetailsEntityList(List<OrderDetailsEntity> orderDetailsEntityList) {
         this.orderDetailsEntityList = orderDetailsEntityList;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }
 

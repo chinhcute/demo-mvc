@@ -1,6 +1,6 @@
 package mvc.repository;
 
-import mvc.controller.BookRedEntity;
+import mvc.entity.BookRedEntity;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;

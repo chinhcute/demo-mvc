@@ -4,6 +4,8 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
+
 @Component
 @Entity
 @Table(name = "products")
@@ -49,6 +51,19 @@ public class ProductEntity {
     public void setOrderDetailsEntityList(List<OrderDetailsEntity> orderDetailsEntityList) {
         this.orderDetailsEntityList = orderDetailsEntityList;
     }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductEntity that = (ProductEntity) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
 
 
 }

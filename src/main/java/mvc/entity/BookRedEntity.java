@@ -1,4 +1,4 @@
-package mvc.controller;
+package mvc.entity;
 
 public class BookRedEntity {
     private int id;
