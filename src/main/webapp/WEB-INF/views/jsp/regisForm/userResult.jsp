@@ -75,6 +75,7 @@
                     </tr>
                 </table>
             </mvc:form>
+             <a href="/remove">remove</a>
         </body>
 
         </html>

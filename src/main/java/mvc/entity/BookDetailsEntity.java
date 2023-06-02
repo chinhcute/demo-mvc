@@ -1,5 +1,6 @@
 package mvc.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -27,6 +28,7 @@ public class BookDetailsEntity {
     private LocalDate publishDate;
 
     @OneToOne(mappedBy = "bookDetails")
+    @JsonManagedReference
     private BookEntity book;
 
     public BookDetailsEntity() {

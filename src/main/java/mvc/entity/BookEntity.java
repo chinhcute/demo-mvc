@@ -1,4 +1,5 @@
 package mvc.entity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -23,20 +24,24 @@ public class BookEntity {
     @JoinColumn(name= "categoryId")
     private CategoryEntity category;
 
+
+
     @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "bookDetailsId")
     @PrimaryKeyJoinColumn
+    @JsonBackReference
     private BookDetailsEntity bookDetails;
 
     public  BookEntity(){
     }
-    @Override
-    public String toString(){
-        return "BookEntity(" +
-                "id=" + id +
-                ",name='" + name + '\'' +
-                ",author='" + author + '\'' +
-                ",category=" + category.getName() + '}';
-    }
+//    @Override
+//    public String toString(){
+//        return "BookEntity(" +
+//                "id=" + id +
+//                ",name='" + name + '\'' +
+//                ",author='" + author + '\'' +
+//                ",category=" + category.getName() + '}';
+//    }
 
     public CategoryEntity getCategory() {
         return category;

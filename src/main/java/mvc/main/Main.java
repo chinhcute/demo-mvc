@@ -3,6 +3,7 @@ package mvc.main;
 
 import mvc.confi.JPA_config;
 import mvc.entity.BookEntity;
+import mvc.entity.CategoryEntity;
 import mvc.repository.BookRepository;
 import mvc.repository.CategoryRepository;
 import org.springframework.context.ApplicationContext;
@@ -20,8 +21,9 @@ public class Main {
     static CategoryRepository categoryRepository = (CategoryRepository) context.getBean("categoryRepository");
 
     public static void main(String[] args) {
+        showCategory();
 //     createNewBook();
-        readBook();
+//        readBook();
 //        update(1);
 //        detele(3);
 //        readBook();
@@ -40,6 +42,14 @@ public class Main {
 //        createNewBookEntryWithNewCategory();
 //        createNewBookEntry();
 //        getJon(1);
+//        showCategory();
+    }
+    public static void showCategory(){
+        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+        System.out.println(categoryEntityList.size());
+        for (CategoryEntity book : categoryEntityList) {
+            System.out.println(book.getName());
+        }
     }
     public static void readBook() {
 

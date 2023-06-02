@@ -88,6 +88,7 @@ public class BookController {
         setCategoryDropDownList(model);
         return "book";
     }
+
     @RequestMapping(value = "/updateBook", method = RequestMethod.POST)
     public String updateBook(@ModelAttribute BookEntity book){
         bookRepository.save(book);

@@ -1,5 +1,7 @@
 package mvc.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -18,6 +20,7 @@ public class CategoryEntity {
     private String description;
 
     @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<BookEntity> bookEntityList;
 
     public int getId() {
